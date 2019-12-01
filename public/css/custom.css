@@ -1,0 +1,74 @@
++/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+.back{
+  position: absolute;
+  z-index: 0;
+  right: 30px;
+  top:85px;
+}
+.alert{
+  position: absolute;
+  right: 0px;
+  top:55px;
+  z-index: 2;
+  width: 20%;
+}
+
+.control-label {
+  text-align: left !important; /* !important added for priority in SO snippet. */
+  padding-left: 1.5em;
+}
+
+
+.panel,input,.input-group-addon,select,button,a,textarea{
+  border-radius: 0 !important;
+}
+.modal-content  {
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important; 
+}
+.tbl-custom thead tr th label{
+	font-size: 12px;
+}
+
+.borderless-head thead tr th{
+	 border-width: 0 !important;
+}
+
+.borderless-body tbody tr td{
+	 border-width: 0 !important;
+}
+
+.borderless-footer tfoot tr th{
+	 border-width: 0 !important;
+}
+
+.money-inp{
+	text-align: right;
+}
+
+.center-t th{
+  text-align: center;
+}
+
+
+

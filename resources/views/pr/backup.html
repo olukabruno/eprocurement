@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <title>{{$supp_pr->supplemental_pr}}</title>
+    
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/lato.css') }}">
+    
+    <style type="text/css">
+    	@page{
+    		margin-top: 15px;
+    		margin-bottom: 10px;
+    	}
+/*		.pagenum:after{
+			content: "Page " counter(page) " of " counter(pages);
+		    float:right;font-weight:normal;font-style:italic;font-size:7pt;width:40%;text-align:right;
+		}*/	
+    </style>
+
+</head>
+<body>
+
+<script type="text/php">
+        if ( isset($pdf) ) {
+            // OLD 
+            // $font = Font_Metrics::get_font("helvetica", "bold");
+            // $pdf->page_text(72, 18, "{PAGE_NUM} of {PAGE_COUNT}", $font, 6, array(255,0,0));
+            // v.0.7.0 and greater
+            $x = 773;
+            $y = 560;
+            $text = "Page {PAGE_NUM} of {PAGE_COUNT}";
+            $font = $fontMetrics->get_font("helvetica", "italic");
+            $size = 7;
+            $color = array(0,0,0);
+            $word_space = 0.0;  //  default
+            $char_space = 0.0;  //  default
+            $angle = 0.0;   //  default
+            $pdf->page_text($x, $y, $text, $font, $size, $color, $word_space, $char_space, $angle);
+        }
+    </script>
+
+
+<div class="container-fluid">
+@php $check=1 @endphp
+@foreach($results as $dos)
+
+<div class="header">
+	<div class="row">
+
+		<div class="col-xs-12">
+		<table align="center" cellspacing='0' cellpadding='5' style="border-width: 0 !important;padding:0px 0px 0px -20px;">
+			<tr>
+				<td style="padding: 10px; width: 10%;"><img src="{{asset('images/sfclogo.png')}}" width="50px" height="50px"></td>
+				<td style="padding-left: 20px;">
+					<table style="text-align: center;'width:45%; font-size: 11px;font-weight: bold;'">
+						<tr><td>REPUBLIC OF THE PHILIPPINES</td></tr>
+						<tr><td>PROVINCE OF LA UNION</td></tr>
+						<tr><td>CITY OF SAN FERNANDO</td></tr>
+					</table>
+				</td>
+				<th style="padding-top: 10px;padding-left: 20px"><p style="background-color: #000;color: #FFF; text-align: center;padding: 10px;">PR</p></th>
+			</tr>
+		</table>
+		</div>
+	</div>
+	<div class="row">
+	  	<div class="col-md-12" style="text-align: center;color: white;background-color: black; font-size: 18px">
+	  		SUPPLEMENTAL PURCHASE REQUEST
+	  	</div>
+	</div>
+	<div class="row" style="margin-top: 1px;">
+	  			<table style='width:100%;border:1px solid #000000;font-size:11pt;' cellspacing='0' cellpadding='5' class='font1'>
+				<tr>
+					<td style='width:40%'>
+						<table style='width:90%;padding-right: 0px;' cellpadding='0' cellspacing='0'>
+							<tr>
+								<td style='width:100%;padding:1px;padding-left:10px;' colspan='2'>DEPARTMENT:</td>
+							</tr>
+							<tr>
+								<td style='width:100%;padding:0px;padding-left:10px;' colspan='2'>{{$dept->office_name}}<hr style='margin:0px 5px 0px;border:0.2px solid #231F20;' /></td>
+							</tr>
+							<tr>
+								<td style='width:15%;padding:1px;padding-left:10px;'>SECTION:</td>
+								<td style='width:75%;padding:0px;padding-left:0px;'>{{$section->office_name}}<hr style='margin:0px 5px 0px;border:0.2px solid #231F20;' /></td>
+							</tr>
+						</table>
+					</td>
+					<td style='width:30%;'>
+						<table style='width:90%;' cellpadding='0' cellspacing='0'>
+							<tr>
+								<td style='width:20%;padding:1px;'>PR No.</td>
+								<td style='width:70%;padding:0px;border-bottom:1px solid #000000;'>{{$supp_pr->pr_form_no}}</td>
+							</tr>
+							<tr>
+								<td style='width:20%;padding:1px;'>SAI No.</td>
+								<td style='width:70%;padding:0px;border-bottom:1px solid #000000;'></td>
+							</tr>
+							<tr>
+								<td style='width:20%;padding:1px;'>ObR No.</td>
+								<td style='width:70%;padding:0px;border-bottom:1px solid #000000;'></td>
+							</tr>
+						</table>
+					</td>
+					<td style='width:30%'>
+						<table style='width:95%;' cellpadding='0' cellspacing='0'>
+							<tr>
+								<td style='width:15%;padding:1px;'>Date</td>
+								<td style='width:70%;padding:0px;border-bottom:1px solid #000000;'>&nbsp;{{$dt->toFormattedDateString()}}</td>
+							</tr>
+							<tr>
+								<td style='width:15%;padding:1px;'>Date</td>
+								<td style='width:70%;padding:0px;border-bottom:1px solid #000000;'></td>
+							</tr>
+							<tr>
+								<td style='width:15%;padding:1px;'>Date</td>
+								<td style='width:70%;padding:0px;border-bottom:1px solid #000000;'></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+	  </div>
+  </div>
+  
+	
+
+<div class="content">
+
+	  <div class="row">
+	  	
+		<table style='width:100%;font-size:14px;text-align:center;border:1px solid #000000;' id='items'  cellpadding='0' cellspacing='0'>
+
+			<thead style="background-color:#231F20;color:#FFFFFF;border:1px solid #000000;">
+				<tr style="border:1px solid #000000;">
+					<td style='width:7%;font-weight:bold;'>ITEM NO.</td>
+					<td style='width:7%;font-weight:bold;'>QTY</td>
+					<td style='width:7%;font-weight:bold;'>UNIT</td>
+					<td style='width:49%;font-weight:bold;'>DESCRIPTION</td>
+					<td style='width:15%;font-weight:bold;'>ESTIMATED UNIT OF</td>
+					<td style='width:15%;font-weight:bold;'>ESTIMATED COST</td>
+				</tr>
+			</thead>	
+
+			
+			
+			@foreach($dos as $list)
+			<tbody style="font-size:14px; border:1px solid #000000;">
+			    <tr style="border:1px solid #000000;">
+			      <td style="border:1px solid #000000;">{{$check++}}</td>
+			      <td style="border:1px solid #000000;">{{$list->pr_qty}}</td>
+			      <td style="border:1px solid #000000;">{{$list->pr_unit}}</td>
+			      <td style="border:1px solid #000000;">{{$list->pr_description}}</td>
+			      <td  style='border:1px solid #000000; text-align: right;'>{{$list->pr_cost_per_unit}}</td>
+			      <td style='border:1px solid #000000; text-align: right;'>{{$list->pr_estimated_cost}}</td>
+			    </tr>
+			</tbody>
+			
+			@endforeach
+			
+			@if($dos->count() < 15)
+
+			@for($i = $dos->count(); $i < 15; $i++)
+                    <tr style='font-size:14px; border:1px solid #000000;'><td style='border:1px solid #000000;'>&nbsp;</td><td style='border:1px solid #000000;'>&nbsp;</td>&nbsp;<td style='border:1px solid #000000;'>&nbsp;</td><td style='border:1px solid #000000;'>&nbsp;</td><td style='border:1px solid #000000;'>&nbsp;</td><td style='border:1px solid #000000;'>&nbsp;</td></tr>
+            @endfor
+
+	            @if($results->count() > 1)
+	            <tfoot style="border:1px solid #000000;">
+					<tr style="background-color: #b0b1b2;">
+				      <td colspan="5" style="text-align: right;">SUB-TOTAL</td>
+				      <td style="text-align: right;">
+				        {{number_format($sum2,2)}}
+				      </td>
+				    </tr>
+				</tfoot>
+				@else
+				<tr style='font-size:14px; border:1px solid #000000;'><td style='border:1px solid #000000;'>&nbsp;</td><td style='border:1px solid #000000;'>&nbsp;</td>&nbsp;<td style='border:1px solid #000000;'>&nbsp;</td><td style='border:1px solid #000000;'>&nbsp;</td><td style='border:1px solid #000000;'>&nbsp;</td><td style='border:1px solid #000000;'>&nbsp;</td></tr>
+				@endif
+			
+			<tfoot>
+				<tr style="background-color: #b0b1b2;">
+			      <td colspan="5" style="text-align: right; font-weight: bold;">GRAND TOTAL</td>
+			      <td style="text-align: right; font-weight: bold;">
+			        {{number_format($grand_total,2)}}
+			      </td>
+			    </tr>
+			</tfoot>
+
+			@else
+
+			<tfoot style="border:1px solid #000000;">
+					<tr style="background-color: #b0b1b2;">
+				      <td colspan="5" style="text-align: right;">SUB-TOTAL</td>
+				      <td style="text-align: right;">
+				        {{number_format($sum1,2)}}
+				      </td>
+				    </tr>
+			</tfoot>
+			<tfoot>
+				<tr style="background-color: #b0b1b2;">
+			      <td colspan="5" style="text-align: right; font-weight: bold;">GRAND TOTAL</td>
+			      <td style="text-align: right; font-weight: bold;">
+			        {{number_format($grand_total,2)}}
+			      </td>
+			    </tr>
+			</tfoot>
+
+			@endif	
+		</table>
+
+	  </div>
+	  
+  </div>
+  
+
+	<div class="row">
+		<table style='width:100%;border:1px solid #000000;font-size:10px;margin-left:auto;margin-right:auto;margin-top:40px;' cellspacing='0' cellpadding='3' class='font1'>
+			<tr>
+				<td style='width:39%; font-weight:bold;text-align:left;border:1px solid #000000;'>
+				REQUESTING OFFICE<br/><br/><br/>
+				</td>
+				<td style='width:60%;border:1px solid #000000;vertical-align:top;font-weight:bold;' colspan='2' rowspan='3'>
+				PURPOSE<br/>
+				<div style='width:100%;text-align:center;font-weight:normal;font-size:11pt;' class='font1'>
+					{{$supp_pr->purpose}}
+				</div>
+				</td>
+			</tr>
+			<tr>
+				<td style='border:1px solid #000000;height:10px;text-align:center;text-transform:uppercase;font-weight:bold;'>
+				{{$supp_pr->requestor_name}}
+				</td>
+			</tr>
+			<tr>
+				<td style='text-align:center;border:1px solid #000000;text-transform:uppercase;height:10px;font-weight:bold'>
+				{{$supp_pr->requestor_position}}
+				</td>
+			</tr>
+			<tr>
+				<td colspan='3' style='background-color:#000000;height:20px;'>
+			</tr>
+			<tr>
+				<td style='width:33%; font-weight:bold;text-align:left;border:1px solid #000000;'>
+				APPROPRIATION AVAILABLE
+				</td>
+				<td style='width:33%; font-weight:bold;text-align:left;border:1px solid #000000;'>
+				FUNDS AVAILABLE
+				</td>
+				<td style='width:33%; font-weight:bold;text-align:left;border:1px solid #000000;'>
+				APPROVED
+				</td>
+			</tr>
+			<tr>
+				<td style='border:1px solid #000000;height:25px;text-align:center;text-transform:uppercase;font-weight:bold;'>
+				
+				</td>
+				<td style='border:1px solid #000000;height:25px;text-align:center;text-transform:uppercase;font-weight:bold;'>
+				
+				</td>
+				<td style='border:1px solid #000000;height:25px;text-align:center;text-transform:uppercase;font-weight:bold;'>
+				
+				</td>
+			</tr>
+			<tr>
+				<td style='width:33%; font-weight:bold;text-align:center;border:1px solid #000000;text-transform:uppercase;'>
+				{{$aa->name}}<br/>
+				{{$aa->position}}
+				</td>
+				<td style='width:33%; font-weight:bold;text-align:center;border:1px solid #000000;text-transform:uppercase;'>
+				{{$c->name}}<br/>
+				{{$c->position}}
+				</td>
+				<td style='width:33%; font-weight:bold;text-align:center;border:1px solid #000000;text-transform:uppercase;'>
+				{{$approval->name}}<br/>
+				{{$approval->position}}
+				</td>
+			</tr>
+		</table>
+		
+		<div style='float:left;font-weight:normal;font-style:italic;font-size:7pt;width:40%;text-align:left;'>{{$created_code}}</div>
+	</div>		
+
+  @endforeach
+
+  <span style="page-break-after:avoid;"></span>
+
+  
+</div>
+
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+</body>
+</html>
+
